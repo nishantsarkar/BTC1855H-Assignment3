@@ -21,6 +21,12 @@ initialization <- function() {
               lettersGuessed = lettersGuessed,
               lettersCorrect = lettersCorrect,
               incorrectGuesses = incorrectGuesses))
+} # End of initialization() function block
+
+# This function contains the main hangman gameplay. 
+hangman <- function() {
+  gameState <- initialization()
 }
 
+hangman()
 
