@@ -20,11 +20,28 @@ secretWordLength <- nchar(secretWord)
 #' been successfully guessed yet. This is updated in the main gameplay loop.
 correctLetters <- rep("_", secretWordLength)
 
-#' Introduction to the game given to the player. Each text line
-#' is separated by a line using /n to improve text readability. 
+#' Initializing guessedLetters as an empty character vector for later use.
+guessedLetters <- character(0)
+
+#' Introduction to the game given to the player. Each text line is separated 
+#' by a line using /n to improve text readability. 
 cat("Welcome to Medical Device Hangman!\n")
 cat("Your goal is to guess the secret word letter-by-letter.\n")
 cat("If you want, you can also guess the whole word.\n")
-cat("Be careful, if you guess wrong six times, you get hanged!\n")
+cat("Be careful, if you guess wrong", wrongGuessesMax, "times, you get hanged!\n")
 cat("Your secret word has", secretWordLength, "letters.\n")
+
+# Main game loop. This is where the core gameplay is controlled.
+while (wrongGuessesCurrent < wrongGuessesMax) {
+  
+  #' This text is displayed each turn so that the player understands the current
+  #' state of the game. 
+  cat("Progress so far:", paste(correctLetters), "\n")
+  cat("Wrong guesses:", paste(guessedLetters), "\n")
+  cat("You have", wrongGuessesMax - wrongGuessesCurrent, "wrong guesses left.\n")
+}
+
+
+
+
 
