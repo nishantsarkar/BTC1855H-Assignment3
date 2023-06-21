@@ -43,6 +43,24 @@ while (wrongGuessesCurrent < wrongGuessesMax) {
   #' Asking for user input, which is converted to lowercase. 
   userInput <- tolower(readline("Enter a letter, or guess the full word: "))
 
+  #' The following nested code block first checks if userInput matches secretWord.
+  #' If it does, the gameplay loop is immediately broken and the player wins.
+  if (userInput == secretWord) {
+    cat(paste0("Great job! You correctly guessed: ", secretWord, ". You didn't get hanged!\n"))
+    break
+  
+  #' The following code checks if userInput is a single alphabetical letter by
+  #' checking if nchar == 1 and using grepl() to determine if the input is
+  #' alphabetical. If so, userInput is compared to secretWord. If userInput is 
+  #' present in secretWord, the guess was correct, and the letter is added to 
+  #' correctLetters in the same position as it is present in secretWord. Otherwise, 
+  #' userInput is added to guessedLetters and the wrongGuessesCurrent counter 
+  #' increases by one.
+  } else if ((nchar(userInput) == 1) && grepl("[[:alpha:]]", userInput)) {
+    print("Test!")
+    break
+  } 
+  
 } # End of main gameplay loop
 
 
