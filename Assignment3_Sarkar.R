@@ -1,7 +1,7 @@
 #' Assignment 3
 #' This script allows the user to play Hangman in R
 
-# This function initializes all the variables in the game.
+# This helper function initializes all the variables in the game.
 initialization <- function() {
   #' Loading words from a text file into a vector, then randomly sampling one word
   #' for the game. Please ensure that words.txt is in your working directory. 
@@ -21,12 +21,15 @@ initialization <- function() {
               lettersGuessed = lettersGuessed,
               lettersCorrect = lettersCorrect,
               incorrectGuesses = incorrectGuesses))
-} # End of initialization() function block
+} #' End of initialization() function block. This function is called in the
+  #' main gameplay loop, with the output list assigned to the variable gameState.
+
+# 
 
 # This function contains the main hangman gameplay. 
 hangman <- function() {
   gameState <- initialization()
-}
 
-hangman()
+} # End of hangman() function block
+
 
