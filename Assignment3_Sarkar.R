@@ -31,7 +31,7 @@ cat("If you want, you can also guess the whole word.\n")
 cat("Be careful, if you guess wrong", wrongGuessesMax, "times, you get hanged!\n")
 cat("Your secret word has", secretWordLength, "letters.\n")
 
-# Main game loop. This is where the core gameplay is controlled.
+#' Main game loop. This is where the core gameplay is controlled.
 while (wrongGuessesCurrent < wrongGuessesMax) {
   
   #' This text is displayed each turn so that the player understands the current
@@ -39,7 +39,11 @@ while (wrongGuessesCurrent < wrongGuessesMax) {
   cat("Progress so far:", paste(correctLetters), "\n")
   cat("Wrong guesses:", paste(guessedLetters), "\n")
   cat("You have", wrongGuessesMax - wrongGuessesCurrent, "wrong guesses left.\n")
-}
+  
+  #' Asking for user input, which is converted to lowercase. 
+  userInput <- tolower(readline("Enter a letter, or guess the full word: "))
+
+} # End of main gameplay loop
 
 
 
