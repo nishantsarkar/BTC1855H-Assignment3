@@ -7,7 +7,9 @@
 wordsList <- readLines("words.txt", warn = FALSE)
 secretWord <- sample(wordsList, 1)
 
-#' Initializing variables for future use.
+#' The next several lines initialize variables for future use. First, the
+#' maximum number of wrong guesses is set to 6, with the initial number of
+#' wrong guesses set to zero. 
 wrongGuessesMax <- 6
 wrongGuessesCurrent <- 0
 
@@ -24,7 +26,10 @@ correctLetters <- rep("_", secretWordLength)
 guessedLetters <- character(0)
 
 #' Initializing the hangmanStates vector, which stores all the states of
-#' the "hangman" representing the number of incorrect guesses.
+#' the "hangman" representing the number of incorrect guesses. These are
+#' drawn using text, spaces, and /n to creat new lines. There are 7 versions
+#' of the hangman corresponding to the 7 possible wrongGuessesCurrent states
+#' (0 to 6). 
 hangmanStates <- c(
   "   T---T\n   |   |\n       |\n       |\n       |\n       |\n",
   "   T---T\n   |   |\n   O   |\n       |\n       |\n       |\n",
@@ -43,13 +48,15 @@ cat("If you want, you can also guess the whole word.\n")
 cat("Be careful, if you guess wrong", wrongGuessesMax, "times, you get hanged!\n")
 cat("Your secret word has", secretWordLength, "letters.\n")
 
-#' Main game loop. This is where the core gameplay is controlled.
+
+#' Main game loop. This is where the core gameplay is controlled. This loop breaks
+#' if the player makes 6 wrong guesses, or guesses the word correctly. 
 while (wrongGuessesCurrent < wrongGuessesMax) {
   
   #' Checking if there are still blanks in correctLetters. If not, the whole word
   #' has been guessed, and the player wins. 
   if (("_" %in% correctLetters) == FALSE) {
-    cat(paste0("Great job! You correctly guessed: ", secretWord, ". You didn't get hanged!\n"))
+    cat(paste0("Great job! You correctly guessed: ", secretWord, ", and had ", wrongGuessesMax - wrongGuessesCurrent, " wrong guesses remaining. \nYou didn't get hanged!\n"))
     break
   }
   
@@ -68,20 +75,19 @@ while (wrongGuessesCurrent < wrongGuessesMax) {
   if (userInput == secretWord) {
     cat(paste0("Great job! You correctly guessed: ", secretWord, ". You didn't get hanged!\n"))
     break
-  } 
-    else if ((nchar(userInput) == 1) && grepl("[[:alpha:]]", userInput)) {
-    #' The above and following code checks if userInput is a single letter by
+    #' The following nested else-if code checks if userInput is a single letter by
     #' checking if nchar == 1 and using grepl() to determine if the input is
     #' alphabetical. If so, userInput is compared to secretWord. If userInput is 
     #' present in secretWord, the guess was correct, and the letter is added to 
     #' correctLetters in the same position as it is present in secretWord. Otherwise, 
     #' userInput is added to guessedLetters and the wrongGuessesCurrent counter 
     #' increases by one.
+  } else if ((nchar(userInput) == 1) && grepl("[[:alpha:]]", userInput)) {
     if (userInput %in% strsplit(secretWord, "")[[1]]) {
       cat("You guessed a letter correctly!\n")
       correctLetters[strsplit(secretWord, "")[[1]] == userInput] <- userInput
     } else {
-      cat("Incorrect guess!\n")
+      cat("Wrong guess!\n")
       guessedLetters <- c(guessedLetters, userInput)
       wrongGuessesCurrent <- wrongGuessesCurrent + 1
     } # Inner if-else to check if single-alphabet input is correct.
@@ -91,7 +97,7 @@ while (wrongGuessesCurrent < wrongGuessesMax) {
     #' letter and is alphabetical. This is for when the user attempts to guess
     #' the whole word but is incorrect, so that it can be added to guessedLetters
     #' and lower the user's remaining wrong guesses. If this was not included,
-    #' multi-letter inputs that are incorrect are recognized as invalid.
+    #' multi-letter inputs that are incorrect would be recognized as invalid.
       cat("Incorrect guess!\n")
       guessedLetters <- c(guessedLetters, userInput)
       wrongGuessesCurrent <- wrongGuessesCurrent + 1
@@ -101,14 +107,11 @@ while (wrongGuessesCurrent < wrongGuessesMax) {
   
 } # End of main gameplay loop
 
-# If statement that checks if the user has met their number of wrong guesses.
+#' If statement that checks if the user has met their number of wrong guesses.
+#' This triggers when the main gameplay loop is broken, displaying a full
+#' hangman and revealing the word.
 if (wrongGuessesCurrent == wrongGuessesMax) {
   cat(hangmanStates[7])
   cat("You're out of guesses and have been hanged!\n")
   cat(paste0("The secret word was ", secretWord, "."))
 } 
-
-#' TO DO: 
-#' Add additional comments to clarify nested if-else.
-#' Possibly add functionality to prevent doubling-up on letters.
-#' Possibly add functionality to replay game.
