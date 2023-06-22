@@ -31,13 +31,13 @@ guessedLetters <- character(0)
 #' of the hangman corresponding to the 7 possible wrongGuessesCurrent states
 #' (0 to 6). 
 hangmanStates <- c(
-  "   T---T\n   |   |\n       |\n       |\n       |\n       |\n",
-  "   T---T\n   |   |\n   O   |\n       |\n       |\n       |\n",
-  "   T---T\n   |   |\n   O   |\n   |   |\n       |\n       |\n",
-  "   T---T\n   |   |\n   O   |\n  /|   |\n       |\n       |\n",
-  "   T---T\n   |   |\n   O   |\n  /|\\  |\n       |\n       |\n",
-  "   T---T\n   |   |\n   O   |\n  /|\\  |\n  /    |\n       |\n",
-  "   T---T\n   |   |\n   O   |\n  /|\\  |\n  / \\  |\n       |\n"
+  "   T---T\n   |   |\n       |\n       |\n       |\n ______|\n",
+  "   T---T\n   |   |\n   O   |\n       |\n       |\n ______|\n",
+  "   T---T\n   |   |\n   O   |\n   |   |\n       |\n ______|\n",
+  "   T---T\n   |   |\n   O   |\n  /|   |\n       |\n ______|\n",
+  "   T---T\n   |   |\n   O   |\n  /|\\  |\n       |\n ______|\n",
+  "   T---T\n   |   |\n   O   |\n  /|\\  |\n  /    |\n ______|\n",
+  "   T---T\n   |   |\n   O   |\n  /|\\  |\n  / \\  |\n ______|\n"
 )
 
 #' Introduction to the game given to the player. Each text line is separated 
