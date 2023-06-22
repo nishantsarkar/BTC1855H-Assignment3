@@ -46,23 +46,40 @@ while (wrongGuessesCurrent < wrongGuessesMax) {
   #' The following nested code block first checks if userInput matches secretWord.
   #' If it does, the gameplay loop is immediately broken and the player wins.
   if (userInput == secretWord) {
-    cat(paste0("Great job! You correctly guessed: ", secretWord, ". You didn't get hanged!\n"))
-    break
-  
-  #' The following code checks if userInput is a single alphabetical letter by
-  #' checking if nchar == 1 and using grepl() to determine if the input is
-  #' alphabetical. If so, userInput is compared to secretWord. If userInput is 
-  #' present in secretWord, the guess was correct, and the letter is added to 
-  #' correctLetters in the same position as it is present in secretWord. Otherwise, 
-  #' userInput is added to guessedLetters and the wrongGuessesCurrent counter 
-  #' increases by one.
-  } else if ((nchar(userInput) == 1) && grepl("[[:alpha:]]", userInput)) {
-    print("Test!")
+    cat("Great job! You correctly guessed: ", secretWord, ". You didn't get hanged!\n")
     break
   } 
+    else if ((nchar(userInput) == 1) && grepl("[[:alpha:]]", userInput)) {
+    #' The above and following code checks if userInput is a single letter by
+    #' checking if nchar == 1 and using grepl() to determine if the input is
+    #' alphabetical. If so, userInput is compared to secretWord. If userInput is 
+    #' present in secretWord, the guess was correct, and the letter is added to 
+    #' correctLetters in the same position as it is present in secretWord. Otherwise, 
+    #' userInput is added to guessedLetters and the wrongGuessesCurrent counter 
+    #' increases by one.
+    if (userInput %in% strsplit(secretWord, "")[[1]]) {
+      cat("You guessed a letter correctly!\n")
+      correctLetters[strsplit(secretWord, "")[[1]] == userInput] <- userInput
+    } else {
+      cat("Incorrect guess!\n")
+      guessedLetters <- c(guessedLetters, userInput)
+      wrongGuessesCurrent <- wrongGuessesCurrent + 1
+    } # Inner if-else to check if single-alphabet input is correct.
+    
+  } else if ((nchar(userInput) > 1) && grepl("[[:alpha:]]", userInput)) {
+    #' The above and following code checks if userInput is more than a single
+    #' letter and is alphabetical. This is for when the user attempts to guess
+    #' the whole word but is incorrect, so that it can be added to guessedLetters
+    #' and lower the user's remaining wrong guesses. If this was not included,
+    #' multi-letter inputs that are incorrect are recognized as invalid.
+      cat("Incorrect guess!\n")
+      guessedLetters <- c(guessedLetters, userInput)
+      wrongGuessesCurrent <- wrongGuessesCurrent + 1
+  } else {
+    cat("Invalid input. Please enter a letter, or guess the full word.\n")
+  } # Outer if-else that compares userInput to secretWord. 
   
 } # End of main gameplay loop
-
 
 
 
