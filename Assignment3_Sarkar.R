@@ -87,4 +87,5 @@ if (wrongGuessesCurrent == wrongGuessesMax) {
   cat(paste0("The secret word was ", secretWord, "."))
 } 
 
-
+#' TO DO: Add Hangman visual, perhaps using a function.
+#'        Add additional comments to clarify nested if-else. 
