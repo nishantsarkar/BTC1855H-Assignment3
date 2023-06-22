@@ -34,6 +34,13 @@ cat("Your secret word has", secretWordLength, "letters.\n")
 #' Main game loop. This is where the core gameplay is controlled.
 while (wrongGuessesCurrent < wrongGuessesMax) {
   
+  #' Checking if there are still blanks in correctLetters. If not, the whole word
+  #' has been guessed, and the player wins. 
+  if (("_" %in% correctLetters) == FALSE) {
+    cat(paste0("Great job! You correctly guessed: ", secretWord, ". You didn't get hanged!\n"))
+    break
+  }
+  
   #' This text is displayed each turn so that the player understands the current
   #' state of the game. 
   cat("Progress so far:", paste(correctLetters), "\n")
@@ -46,7 +53,7 @@ while (wrongGuessesCurrent < wrongGuessesMax) {
   #' The following nested code block first checks if userInput matches secretWord.
   #' If it does, the gameplay loop is immediately broken and the player wins.
   if (userInput == secretWord) {
-    cat("Great job! You correctly guessed: ", secretWord, ". You didn't get hanged!\n")
+    cat(paste0("Great job! You correctly guessed: ", secretWord, ". You didn't get hanged!\n"))
     break
   } 
     else if ((nchar(userInput) == 1) && grepl("[[:alpha:]]", userInput)) {
@@ -87,5 +94,6 @@ if (wrongGuessesCurrent == wrongGuessesMax) {
   cat(paste0("The secret word was ", secretWord, "."))
 } 
 
-#' TO DO: Add Hangman visual, perhaps using a function.
-#'        Add additional comments to clarify nested if-else. 
+#' TO DO: 
+#' Add Hangman visual, perhaps using a function.
+#' Add additional comments to clarify nested if-else. 
