@@ -4,7 +4,7 @@
 
 #' Loading words from a predefined list of words into the character vector 
 #' wordsList using readLines(). One word is randomly sampled using sample(). 
-wordsList <- readLines("words.txt")
+wordsList <- readLines("words.txt", warn = FALSE)
 secretWord <- sample(wordsList, 1)
 
 #' Initializing variables for future use.
