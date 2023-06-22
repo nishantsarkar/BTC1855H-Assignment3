@@ -81,6 +81,10 @@ while (wrongGuessesCurrent < wrongGuessesMax) {
   
 } # End of main gameplay loop
 
-
+# If statement that checks if the user has met their number of wrong guesses.
+if (wrongGuessesCurrent == wrongGuessesMax) {
+  cat("You're out of guesses and have been hanged!\n")
+  cat(paste0("The secret word was ", secretWord, "."))
+} 
 
 
