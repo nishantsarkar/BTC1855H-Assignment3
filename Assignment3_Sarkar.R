@@ -56,7 +56,8 @@ while (wrongGuessesCurrent < wrongGuessesMax) {
   #' Checking if there are still blanks in correctLetters. If not, the whole word
   #' has been guessed, and the player wins. 
   if (("_" %in% correctLetters) == FALSE) {
-    cat(paste0("Great job! You correctly guessed: ", secretWord, ", and had ", wrongGuessesMax - wrongGuessesCurrent, " wrong guesses remaining. \nYou didn't get hanged!\n"))
+    cat(paste0("Great job! You correctly guessed: ", secretWord, ", and had ", 
+               wrongGuessesMax - wrongGuessesCurrent, " wrong guesses remaining. \nYou didn't get hanged!\n"))
     break
   }
   
@@ -92,12 +93,15 @@ while (wrongGuessesCurrent < wrongGuessesMax) {
       wrongGuessesCurrent <- wrongGuessesCurrent + 1
     } # Inner if-else to check if single-alphabet input is correct.
     
-  } else if ((nchar(userInput) > 1) && grepl("[[:alpha:]]", userInput)) {
+  } else if ((nchar(userInput) > 1) && grepl("[[:alpha:]]", userInput) && !(grepl("\\d", userInput)) 
+            && !(grepl("[[:punct:]]", userInput)) && !(grepl("[[:space:]]", userInput))) {
     #' The above and following code checks if userInput is more than a single
     #' letter and is alphabetical. This is for when the user attempts to guess
     #' the whole word but is incorrect, so that it can be added to guessedLetters
     #' and lower the user's remaining wrong guesses. If this was not included,
-    #' multi-letter inputs that are incorrect would be recognized as invalid.
+    #' multi-letter inputs that are incorrect would not be recognized. The code 
+    #' also checks if the longer input has numbers, spaces, or punctuation, and 
+    #' recognizes those as invalid.
       cat("Incorrect guess!\n")
       guessedLetters <- c(guessedLetters, userInput)
       wrongGuessesCurrent <- wrongGuessesCurrent + 1
