@@ -23,6 +23,18 @@ correctLetters <- rep("_", secretWordLength)
 #' Initializing guessedLetters as an empty character vector for later use.
 guessedLetters <- character(0)
 
+#' Initializing the hangmanStates vector, which stores all the states of
+#' the "hangman" representing the number of incorrect guesses.
+hangmanStates <- c(
+  "   T---T\n   |   |\n       |\n       |\n       |\n       |\n",
+  "   T---T\n   |   |\n   O   |\n       |\n       |\n       |\n",
+  "   T---T\n   |   |\n   O   |\n   |   |\n       |\n       |\n",
+  "   T---T\n   |   |\n   O   |\n  /|   |\n       |\n       |\n",
+  "   T---T\n   |   |\n   O   |\n  /|\\  |\n       |\n       |\n",
+  "   T---T\n   |   |\n   O   |\n  /|\\  |\n  /    |\n       |\n",
+  "   T---T\n   |   |\n   O   |\n  /|\\  |\n  / \\  |\n       |\n"
+)
+
 #' Introduction to the game given to the player. Each text line is separated 
 #' by a line using /n to improve text readability. 
 cat("Welcome to Medical Device Hangman!\n")
@@ -43,6 +55,7 @@ while (wrongGuessesCurrent < wrongGuessesMax) {
   
   #' This text is displayed each turn so that the player understands the current
   #' state of the game. 
+  cat(hangmanStates[wrongGuessesCurrent + 1])
   cat("Progress so far:", paste(correctLetters), "\n")
   cat("Wrong guesses:", paste(guessedLetters), "\n")
   cat("You have", wrongGuessesMax - wrongGuessesCurrent, "wrong guesses left.\n")
@@ -90,10 +103,12 @@ while (wrongGuessesCurrent < wrongGuessesMax) {
 
 # If statement that checks if the user has met their number of wrong guesses.
 if (wrongGuessesCurrent == wrongGuessesMax) {
+  cat(hangmanStates[7])
   cat("You're out of guesses and have been hanged!\n")
   cat(paste0("The secret word was ", secretWord, "."))
 } 
 
 #' TO DO: 
-#' Add Hangman visual, perhaps using a function.
-#' Add additional comments to clarify nested if-else. 
+#' Add additional comments to clarify nested if-else.
+#' Possibly add functionality to prevent doubling-up on letters.
+#' Possibly add functionality to replay game.
