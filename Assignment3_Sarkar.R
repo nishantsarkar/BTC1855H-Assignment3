@@ -1,3 +1,16 @@
+###Peer Review 
+#Great job with everything! I really liked the way that you created the hangmanStates vector and 
+#printed the hangman as well as showed the user which guesses they have already had. Overall great job, 
+#At first I was expecting for the while loop to also have the ""You're out of guesses and have been hanged!"
+#in it so that it automatically tells the player whether or not they have lost. I then proceeded to try and 
+#modify your code to include that. However, after 2 hours I realized that it would need complete restructuring of the 
+#code for which my brain was not equipped. I imagine that the while loop statement in the beginning would have to say 
+#while (TRUE) and have an inner if statement have the condition of (wrongGuessesCurrent < wrongGuessesMax)
+# It is definitely something that I will look into and let you know if I do figure it out.
+#But overall, you did a wonderful job and were very creative with your code!!! 
+
+
+
 #' Assignment 3
 #' This script allows the user to play Hangman in R
 #' Please ensure that words.txt is in your working directory. 
